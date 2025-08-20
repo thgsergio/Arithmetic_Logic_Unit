@@ -20,12 +20,14 @@ module ULA_a (
             
             case ({Sel_mode, Mode})
                 // Aritméticas
-                4'b0000: temp_result = {1'b0, A} + {1'b0, B};  // A+B
-                4'b0001: temp_result = {1'b0, A} - {1'b0, B};  // A-B
-                4'b0100: temp_result = {1'b0, A} + 7'd1;       // A+1
-                4'b0101: temp_result = {1'b0, A} - 7'd1;       // A-1
-                4'b0110: temp_result = {1'b0, B} + 7'd1;       // B+1
-                4'b0111: temp_result = {1'b0, B} - 7'd1;       // B-1
+                4'b0000: temp_result = {1'b0, A} + {1'b0, B};   // A+B
+					 4'b0001: temp_result = {1'b0, A} - {1'b0, B};   // A-B
+					 4'b0010: temp_result = {1'b0, A} + {1'b0, ~B};  // A+~B
+					 4'b0011: temp_result = {1'b0, A} - {1'b0, ~B};  // A-~B
+					 4'b0100: temp_result = {1'b0, A} + 7'd1;        // A+1
+					 4'b0101: temp_result = {1'b0, A} - 7'd1;        // A-1
+					 4'b0110: temp_result = {1'b0, B} + 7'd1;        // B+1
+					 4'b0111: temp_result = {1'b0, B} - 7'd1;        // B-1
                 
                 // Lógicas
                 4'b1000: ULA = A & B;
@@ -47,14 +49,16 @@ module ULA_a (
             overflow_signed = (A[5] == B[5]) && (ULA[5] != A[5]);
             
             // Seleção do carry_out
-            if ({Sel_mode, Mode} == 4'b0000 || {Sel_mode, Mode} == 4'b0001)
-                carry_out = overflow_signed;  // Soma/subtração → overflow signed
-            else if ({Sel_mode, Mode} == 4'b0100 ||
-						{Sel_mode, Mode} == 4'b0101 ||
-						{Sel_mode, Mode} == 4'b0110 ||
-						{Sel_mode, Mode} == 4'b0111)
-
-                carry_out = temp_result[6];   // Incremento/decremento → carry unsigned
+            if ({Sel_mode, Mode} == 4'b0000 || // A+B
+					 {Sel_mode, Mode} == 4'b0001 || // A-B
+					 {Sel_mode, Mode} == 4'b0010 || // A+~B
+					 {Sel_mode, Mode} == 4'b0011)   // A-~B
+					 carry_out = overflow_signed;   // Soma/subtração → overflow signed
+				else if ({Sel_mode, Mode} == 4'b0100 || // A+1
+							{Sel_mode, Mode} == 4'b0101 || // A-1
+							{Sel_mode, Mode} == 4'b0110 || // B+1
+							{Sel_mode, Mode} == 4'b0111)   // B-1
+					 carry_out = temp_result[6];   // Incremento/decremento → carry unsigned
             
             Zero = (ULA == 6'b0);
         end
