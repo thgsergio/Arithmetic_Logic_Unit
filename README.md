@@ -1,6 +1,6 @@
 # Arithmetic Logic Unit
 - UFPB Logic Circuits II Project - 2024.2
-- Made in SystemVerilog
+- Made using SystemVerilog
 
 ### Team:
 - Gabriel Lorenzo Xavier 
@@ -11,8 +11,8 @@
 
 ## About
 
-This is a simple project of an ALU (Arithmetic and Logic Unit) of a computer. We, as students of Computer Engineering at UFPB - Brazil, are learning how to develop logic circuits in SystemVerilog, so we had the task to make an ALU in order to put our knowledge in practice.
+This project consists on making an ALU (Arithmetic and Logic Unit). This semester we are learning how to develop logic circuits in SystemVerilog and we were given this task to test our knowledge in practice.
 
-This project may be simple, but it's a great step in our journey as enginners because it's the beginning of a computer development. Our goal is learn how to make computers, and this project can show us how to start this task, teaching us how to develop one of the most important part of a computer, which is the ALU.
+This project may be simple, but still an exciting one, since it's a small but important step in our journey learning computer design and as students Computer Engineering at UFPB - Brazil. After all, to make computers it's the one of the main goals of our profession, and this project can show us how to start this task, teaching us how to develop one of the core parts of a computer.
 
-Thank you for visiting this website!
+Thank you for visiting this webpage!
